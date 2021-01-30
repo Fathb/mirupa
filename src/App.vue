@@ -30,7 +30,7 @@
   <router-view />
   <div class="row footer">
     <div class="col text-center">
-      <p>&copy 2021 All Rights Reserved By Fathul Bari.</p>
+      <p>2021 All Rights Reserved By Fathul Bari</p>
     </div>
   </div>
 </template>

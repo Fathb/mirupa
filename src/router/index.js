@@ -28,6 +28,11 @@ const routes = [{
     component: () => import('../views/profile.vue')
   },
   {
+    path: '/gallery',
+    name: 'profile',
+    component: () => import('../views/gallery.vue')
+  },
+  {
     path: '/:catchAll(.*)',
     name: '404',
     component: () => import('../views/404.vue')

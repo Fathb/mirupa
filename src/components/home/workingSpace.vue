@@ -7,7 +7,7 @@
       <div class="col-lg-6">
         <h3 class="mt-5">membentuk jiwa berakhlaqul karimah</h3>
         <p>mencerdaskan tunas bangsa santun berwibawa Membangun bangsa bermartabat mulia</p>
-        <a href="/" class="btn btn-primary tombol">GALLERY</a>
+        <a href="/gallery" class="btn btn-primary tombol">GALLERY</a>
       </div>
     </div>
   </div>

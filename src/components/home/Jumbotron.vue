@@ -46,9 +46,15 @@
     .btn {
       border-radius: 20px;
     }
-@media (max-width:992px) {
+    .container img {
+      margin-top: 80px;
+    }
+@media (min-width:600px) {
       .jumbotron {
         height: 640px;
+      }
+      .jumbotron h1 {
+        font-size: 38px;
       }
     }
 </style>

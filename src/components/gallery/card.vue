@@ -4,17 +4,24 @@
 	  <div class="gallery mt-4">
 		  <ul>
 		  	<li>
+		  		<a href="#img1">
+		  			<img src="../../assets/img/img1.jpeg">
+		  			<span>GUS KHOIRON</span>
+		  		</a>
+		  		<div class="overlay" id="img1">
+		  		  <a href="#" class="close">X close</a>
+		  		  <img src="../../assets/img/img1.jpeg">
+		  		</div>
+		  	</li>
+		  	<li>
 		  		<a href="#img2">
 		  			<img src="../../assets/img/img2.jpeg">
 		  			<span>GUS KHOIRON</span>
 		  		</a>
-		  		<div class="overlay" id="img2"></div>
-		  	</li>
-		  	<li>
-		  		<a href="">
-		  			<img src="../../assets/img/img1.jpeg">
-		  			<span>GUS KHOIRON</span>
-		  		</a>
+		  		<div class="overlay" id="img2">
+		  		  <a href="#" class="close">X close</a>
+		  		  <img src="../../assets/img/img2.jpeg">
+		  		</div>
 		  	</li>
 		  	<li>
 		  		<a href="">
@@ -45,7 +52,7 @@
 		margin: auto;
 		padding: 30px;
 		background-color: #ddd;
-		border-radius: 5px;
+		border-radius: 25px;
 	}
 	.gallery li {
 		width: 300px;
@@ -71,28 +78,48 @@
 	.clear {
 		clear: both;
 	}
-	img {
+	.gallery li a img {
 		height: 100%;
 		width: auto;
-		display: block;
 		margin: auto;
-		position: relative;
+		object-fit: fill;
 	}
 	.gallery li a:hover img {
 		opacity: 50%;
 	}
 	.overlay{
+	  width: 0;
+	  height: 0;
+	  overflow: hidden;
 		position: fixed;
 		top: 0;
 		left: 0;
 		background: rgba(0,0,0,0);
 		z-index: 999;
 		transition: 1s;
+		padding: 100px 0;
 	}
 	.overlay:target {
+	  width: 100%;
+	  height: 100%;
 		right: 0;
 		bottom: 0;
-		background: rgba(0,0,0,0.8);
+		background: rgba(0,150,0,0.5);
+	}
+	.overlay img {
+	  max-height: auto;
+	  max-width: 100%;
+	  box-shadow: 2px 2px 2px 5px rgba(0,0,0,.7);
+		object-fit: contain;
+	}
+	.overlay:target img {
+	  animation: zoomFade 1s;
+	}
+	.overlay .close {
+	  position: absolute;
+	  right: 0;
+	  top: 0;
+	  margin: 15px 15px;
 	}
 
 
@@ -101,6 +128,15 @@
 
 
 
-
+@keyframes zoomFade {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 
 </style>

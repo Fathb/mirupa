@@ -6,18 +6,18 @@
         <div class="row">
           <div class="col">
             <img src="../../assets/img/infoP1.png" alt="visi & misi" class="float-left"/>
-            <h4> Visi & Misi</h4>
-            <p>Lorem ipsum dolor sit amet.</p>
+            <h4> Alamat</h4>
+            <p>jl Raya 02 Ganjaran</p>
           </div>
           <div class="col">
             <img src="../../assets/img/infoP2.png" alt="visi & misi" class="float-left"/>
             <h4> JADWAL</h4>
-            <p>Lorem ipsum dolor sit amet.</p>
+            <p>Sabtu - Jum'at, 06.30 - 14.00</p>
           </div>
           <div class="col">
             <img src="../../assets/img/infoP3.png" alt="visi & misi" class="float-left"/>
-            <h4> Prestasi </h4>
-            <p>Lorem ipsum dolor sit amet.</p>
+            <h4>Contact</h4>
+            <p>+62 815 4515 1500</p>
           </div>
         </div>
       </div>

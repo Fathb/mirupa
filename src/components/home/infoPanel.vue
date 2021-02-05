@@ -12,7 +12,7 @@
           <div class="col">
             <img src="../../assets/img/infoP2.png" alt="visi & misi" class="float-left"/>
             <h4> JADWAL</h4>
-            <p>Sabtu - Jum'at, 06.30 - 14.00</p>
+            <p>Sabtu - Kamis,<br/> 06.30 - 14.00</p>
           </div>
           <div class="col">
             <img src="../../assets/img/infoP3.png" alt="visi & misi" class="float-left"/>

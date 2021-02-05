@@ -21,9 +21,12 @@
   </div> -->
   <div id="nav">
     <nav class="navbar navbar-expand-lg navbar-light bg-transparant fixed-top">
-      <a class="navbar-brand" href="/">
-        MIRUPa
-      </a>
+      <div class="navbar-brand">
+        <img src="./assets/logo.png" alt="MIRUPa" width="35" height="35" class="mr-2"/>
+        <a href="/">
+          MIRUPa
+        </a>
+      </div>
       <div class="ml-auto">
       <router-link to="/" class="ml-auto">Home</router-link>
       <router-link to="/profile" class="ml-5">Profile</router-link>

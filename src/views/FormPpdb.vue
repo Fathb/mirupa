@@ -1,7 +1,9 @@
 <template>
   <div class="container mb-5 pb-3 pt-3">
-    <h2>Formulir Pendaftaran Siswa Baru</h2>
-    <h2 class="mb-5"><strong>MI RAUDLATUL ULUM PUTRA</strong></h2>
+    <div class="card-header text-center mb-3">
+    <h3>Formulir Pendaftaran Siswa Baru</h3>
+    <h2><strong>MI RAUDLATUL ULUM PUTRA</strong></h2>
+    </div>
     <form>
       <h3><strong>Data Siswa</strong></h3>
       <div class="form-group row">
@@ -215,6 +217,12 @@
   </div>
 </template>
 <style scoped>
+  body {
+    background: green;
+  }
+  .card-header h3 {
+    text-align: center;
+  }
   h3,h4,form {
     text-align: left;
   }
@@ -223,5 +231,9 @@
   }
   .container {
     background-color: skyblue;
+    margin-top: 60px;
+  }
+  .card-header {
+    box-shadow: 1px 1px 5px rgba(0,0,0,.7);
   }
 </style>

@@ -1,44 +1,77 @@
 <template>
-	<div class="container">
-	  <h3>Gallery MIRUPa</h3>
-	  <div class="gallery mt-4">
-		  <ul>
-		  	<li>
-		  		<a href="#img1">
-		  			<img src="../../assets/img/img1.jpeg">
-		  			<span>GUS KHOIRON</span>
-		  		</a>
-		  		<div class="overlay" id="img1">
-		  		  <a href="#" class="close">X close</a>
-		  		  <img src="../../assets/img/img1.jpeg">
-		  		</div>
-		  	</li>
-		  	<li>
-		  		<a href="#img2">
-		  			<img src="../../assets/img/img2.jpeg">
-		  			<span>GUS KHOIRON</span>
-		  		</a>
-		  		<div class="overlay" id="img2">
-		  		  <a href="#" class="close">X close</a>
-		  		  <img src="../../assets/img/img2.jpeg">
-		  		</div>
-		  	</li>
-		  	<li>
-		  		<a href="">
-		  			<img src="../../assets/img/img3.jpeg">
-		  			<span>GUS KHOIRON</span>
-		  		</a>
-		  	</li>
-		  	<li>
-		  		<a href="">
-		  			<img src="../../assets/img/img4.jpeg">
-		  			<span>GUS KHOIRON</span>
-		  		</a>
-		  	</li>
-		  	<div class="clear"></div>
-		  </ul>
-	  </div>
-	</div>
+  <ul>
+  	<li>
+  		<a href="#img1">
+  			<img src="../../assets/img/img1.jpeg">
+  			<span>GUS KHOIRON</span>
+  		</a>
+  		<div class="overlay" id="img1">
+  		  <a href="#" class="close">X close</a>
+  		  <img src="../../assets/img/img1.jpeg">
+  		</div>
+  	</li>
+  	<li>
+  		<a href="#img2">
+  			<img src="../../assets/img/img2.jpeg">
+  			<span>GUS KHOIRON</span>
+  		</a>
+  		<div class="overlay" id="img2">
+  		  <a href="#" class="close">X close</a>
+  		  <img src="../../assets/img/img2.jpeg">
+  		</div>
+  	</li>
+  	<li>
+  		<a href="#img5">
+  			<img src="../../assets/img/img5.jpeg">
+  			<span>GUS KHOIRON</span>
+  		</a>
+  		<div class="overlay" id="img5">
+  		  <a href="#" class="close">X close</a>
+  		  <img src="../../assets/img/img5.jpeg">
+  		</div>
+  	</li>
+  	<li>
+  		<a href="#img6">
+  			<img src="../../assets/img/img6.jpeg">
+  			<span>GUS KHOIRON</span>
+  		</a>
+  		<div class="overlay" id="img6">
+  		  <a href="#" class="close">X close</a>
+  		  <img src="../../assets/img/img6.jpeg">
+  		</div>
+  	</li>
+  	<li>
+  		<a href="#img7">
+  			<img src="../../assets/img/img7.jpeg">
+  			<span>GUS KHOIRON</span>
+  		</a>
+  		<div class="overlay" id="img7">
+  		  <a href="#" class="close">X close</a>
+  		  <img src="../../assets/img/img7.jpeg">
+  		</div>
+  	</li>
+  	<li> 
+  		<a href="#img8">
+  			<img src="../../assets/img/mirupa.jpg">
+  			<span>GUS KHOIRON</span>
+  		</a>
+  		<div class="overlay" id="img8">
+  		  <a href="#" class="close">X close</a>
+  		  <img src="../../assets/img/mirupa.jpg">
+  		</div>
+  	</li>
+  	<li> 
+  		<a href="#video">
+  			<video src="../../assets/cat-herd.webm"></video>
+  			<span>GUS KHOIRON</span>
+  		</a>
+  		<div class="overlay" id="video">
+  		  <a href="#" class="close">X close</a>
+  		  <video src="../../assets/cat-herd.webm" controls></video>
+  		</div>
+  	</li>
+  	<div class="clear"></div>
+  </ul>
 </template>
 <script>
   
@@ -47,21 +80,16 @@
   }
 </script>
 <style scoped>
-	.gallery {
-		width: auto;
-		margin: auto;
-		padding: 30px;
-		background-color: #ddd;
-		border-radius: 25px;
-	}
 	.gallery li {
-		width: 300px;
+		width: 23%;
 		height: 300px;
 		border-radius: 15%;
 		overflow: hidden;
 		box-shadow: 0 0 3px 3px rgba(0,0,0,0.3);
+		align-content: center;
 		float: left;
 		margin-right: 20px;
+		margin-left: auto;
 		margin-bottom: 20px;
 		position: relative;
 
@@ -90,7 +118,7 @@
 	.overlay{
 	  width: 0;
 	  height: 0;
-	  overflow: hidden;
+	  overflow: scroll;
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -122,11 +150,12 @@
 	  margin: 15px 15px;
 	}
 
-
-
-
-
-
+@media (max-width:992px) {
+  .gallery li {
+    width: 45%;
+    height: 150px;
+  }
+}
 
 @keyframes zoomFade {
   0% {

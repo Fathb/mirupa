@@ -29,7 +29,7 @@ const routes = [{
   },
   {
     path: '/gallery',
-    name: 'profile',
+    name: 'gallery',
     component: () => import('../views/gallery.vue')
   },
   {

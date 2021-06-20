@@ -1,22 +1,23 @@
 <template>
+  <Navbar></Navbar>
   <Jumbotron></Jumbotron>
   <div class="row justify-content-center">
-    <div class="col-10 info-panel">
-      <div class="row">
-        <div class="col">
+    <div class="col-9 info-panel">
+      <div class="row text-center">
+        <div class="col-4">
           <a href="#sejarah"><h4>
             Sejarah
           </h4>
           </a>
         </div>
-        <div class="col">
+        <div class="col-4">
           <a href="#visimisi"><h4>
             Visi & Misi
           </h4>
           </a>
         </div>
-        <div class="col">
-          <a href=""><h4>
+        <div class="col-4">
+          <a href="#struktur"><h4>
             Struktur
           </h4>
           </a>
@@ -40,19 +41,19 @@
     </p>
   </div>
   <section id="visimisi">
-    <div class="row border border-success pt-2">
+    <div class="row pt-2">
       <div class="col">
         <h3>VISI & MISI</h3>
       </div>
     </div>
     <div class="row pt-2">
-      <div class="col border border-success">
+      <div class="col boder border-success">
         <h3>Visi</h3>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro cumque ipsa repellendus cupiditate distinctio, at voluptas dicta non voluptatem optio.
         </p>
       </div>
-      <div class="col border border-success text-left">
+      <div class="col text-left">
         <h3 class="text-center">Misi</h3>
         <ul>
           <li>
@@ -84,13 +85,13 @@
       </div>
     </div>
   </section>
-  <div class="struktur text-left">
-    <div class="row boder border-success">
+  <div class="struktur text-left" id="struktur">
+    <div class="row boder">
       <div class="col text-center">
         <h3>STRUKTUR PENGURUS & GURU <br>MI RAUDLATUL ULUM PUTRA</h3>
       </div>
     </div>
-    <div class="row text-left boder border-success">
+    <div class="row text-left">
       <div class="col col-1 text-center">
         No
       </div>
@@ -157,15 +158,20 @@
       </div>
     </div>
   </div>
+  <Footer></Footer>
 </template>
 
 <script>
   import Jumbotron from '../components/home/Jumbotron.vue'
+  import Navbar from '../components/layout/navbar.vue'
+  import Footer from '../components/layout/footer.vue'
 
   export default {
     name: 'Profile',
     components: {
-      Jumbotron
+      Jumbotron,
+      Navbar,
+      Footer
     }
   }
   </script>
@@ -190,6 +196,7 @@
       border-radius: 5px;
       margin: 30px auto;
       padding: 15px;
+      display: none;
     }
     #sejarah p {
       font-size: 16px;
@@ -202,14 +209,28 @@
       height: 100%;
       width: 90%;
       margin: 10px auto;
+      display: none;
     }
     .struktur {
       width: 85%;
       margin: 30px auto;
+      display: none;
     }
     .struktur .row, .struktur .row .col {
-      border: solid green;
+      border: solid lightgreen;
     }
-
-
+    #sejarah:target, #visimisi:target, #struktur:target {
+      display: block;
+      animation: zoomFade 1.5s;
+    }
+@keyframes zoomFade {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
   </style>

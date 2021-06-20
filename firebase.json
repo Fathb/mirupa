@@ -1,15 +1,15 @@
 {
-  "hosting": {
-    "site":"miruputra",
-    "public": "dist",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [{
-      "source": "**",
-      "destination": "/index.html"
-    }]
-  }
+ "hosting": {
+  "public": "dist",
+  "site": "miruputra",
+  "ignore": [
+   "firebase.json",
+   "**/.*",
+   "**/node_modules/**"
+  ],
+  "rewrites": [{
+   "source": "**",
+   "destination": "/index.html"
+  }]
+ }
 }

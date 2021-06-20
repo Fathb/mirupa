@@ -13,7 +13,7 @@ import {
 
 
 let app;
-auth.onAuthStateChanged(user => {
+auth.onAuthStateChanged(() => {
  if (!app) {
   app = createApp(App).use(store).use(router).mount('#app');
  }

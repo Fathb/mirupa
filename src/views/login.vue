@@ -55,7 +55,7 @@
   methods: {
    login() {
     auth.signInWithEmailAndPassword(this.email, this.password)
-    .then(user=> {
+    .then(()=> {
      this.$router.push({
       path: '/dashboard'
      })

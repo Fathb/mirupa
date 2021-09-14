@@ -66,7 +66,6 @@
   computed: {
    fixPassword() {
     if (this.password2 != this.password) {
-     this.msg = "password is not match";
      return null;
     } else {
      return this.password;

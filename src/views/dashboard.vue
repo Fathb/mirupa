@@ -2,45 +2,32 @@
  <div class="wrapper">
   <div class="row">
    <!--sidebar-->
-   <div class="col-lg-3 col-sm-4 d-lg-block d-sm-none bg-success sidebar">
+   <div class="col-lg-3 col-sm-4 d-lg-block sidebar vh-100 bg-success position-fixed overflow-hidden d-sm-none">
     <div class="boxUser">
-     <div class="img-user rounded-circle border d-flex justify-content-center overflow-hidden my-1 mx-auto">
-      <img src="../assets/logo.jpeg" alt="user image" height="100">
+     <div class="img-user rounded-circle border d-flex justify-content-center overflow-hidden my-1 mx-auto bg-warning">
+      <img src="../assets/logo.jpeg" alt="user" height="100" />
      </div>
      <div class="user-name font-weight-bold text-center text-uppercase">
-      {{user.name}}
+      {{name}}
      </div>
      <div class="user-email text-center">
-      {{user.email}}
+      {{email}}
      </div>
-     <hr>
-     <div class="nav">
-      <div class="menu nav-item mt-2">
-       <a href="/dashboard" class="nav-link py-1 d-flex align-item-center">
-        <span class="iconmenu mx-3"><i class="fas fw fa-tachometer-alt fa-2x"></i></span>
-        <span class="titlemenu text-uppercase font-weight-bold mt-1">dashboard</span>
-       </a>
-      </div>
-      <div class="menu nav-item mt-2">
-       <a href="#" class="nav-link py-1 d-flex align-item-center">
-        <span class="iconmenu mx-3"><i class="fas fw fa-user fa-2x"></i></span>
-        <span class="titlemenu text-uppercase font-weight-bold mt-1">profile</span>
-       </a>
-      </div>
-      <div class="menu nav-item mt-2">
-       <a href="#" class="nav-link py-1 d-flex align-item-center">
-        <span class="iconmenu mx-3"><i class="fas fw fa-edit fa-2x"></i></span>
-        <span class="titlemenu text-uppercase font-weight-bold mt-1">quiz</span>
-       </a>
-      </div>
+    </div>
+    <hr>
+    <div class="nav">
+     <div class="menu nav-item mt-1 ml-3" v-for="(menu, id) in menus">
+      <router-link :to="menu.url" class="nav-link py-1 d-flex align-item-center">
+       <span class="iconmenu mr-2"><i :class="menu.icon"></i></span>
+       <span class="titlemenu text-uppercase font-weight-bold mt-1">{{menu.title}}</span>
+      </router-link>
      </div>
     </div>
    </div>
    <!--end sidebar-->
    <div class="col-lg-9 col-sm-12 content">
     <!--topbar-->
-
-    <div class="nav bg-info d-flex justify-content-between py-2 px-3">
+    <div class="nav bg-info d-flex justify-content-between py-2 pl-4 pr-3 topbar">
      <div class="nav-item d-lg-none d-sm-inline" @click="toggleMenu">
       <i class="fas fw fa-bars fa-2x"></i>
      </div>
@@ -51,11 +38,10 @@
       <i class="fas fw fa-sign-out-alt fa-2x"></i>
      </div>
     </div>
-
     <!--end topbar-->
-
-    <h1>anda adalah {{user.level}}</h1>
-    <button @click="logout">logout</button>
+    <div @click="removeSidebar">
+     <router-view></router-view>
+    </div>
    </div>
   </div>
  </div>
@@ -70,24 +56,76 @@
   name: 'dashboard',
   data() {
    return {
-    user: ""
+    /*user: {
+     name: "test name",
+     email: "test email",
+     level: "siswa",
+    },*/
+    listMenu: [{
+     title: "dashboard",
+     icon: "fas fw fa-tachometer-alt fa-2x",
+     url: "/dashboard",
+     isAdmin: true,
+     isGuru: true,
+     isSiswa: true
+    },
+     {
+      title: "profile",
+      icon: "fas fw fa-user fa-2x",
+      url: "/dashboard/profile",
+      isAdmin: true,
+      isGuru: true,
+      isSiswa: true
+     },
+     {
+      title: "jadwal",
+      icon: "fas fw fa-calendar-check fa-2x",
+      url: "/dashboard/jadwal",
+      isAdmin: true,
+      isGuru: true,
+      isSiswa: true
+     },
+     {
+      title: "ppdb",
+      icon: "fas fw fa-clipboard-list fa-2x",
+      url: "/dashboard/ppdb",
+      isAdmin: false,
+      isGuru: false,
+      isSiswa: true
+     },
+     {
+      title: "informasi",
+      icon: "fas fw fa-volume-up fa-2x",
+      url: "/dashboard/info",
+      isAdmin: false,
+      isGuru: true,
+      isSiswa: false
+     },
+     {
+      title: "mading",
+      icon: "fas fw fa-feather-alt fa-2x",
+      url: "/dashboard",
+      isAdmin: false,
+      isGuru: false,
+      isSiswa: true
+     }]
    }
   },
   async created() {
+   //this.$store.dispatch("getUserInfo");
    let uid;
    await auth.onAuthStateChanged(user=> {
     if (user) {
      uid = user.uid;
     } else {
      uid = false;
+     this.$router.replace("/login")
     }
-   })
-   if (uid) {
-    await db.collection('users').doc(uid).get()
-    .then(snap=> {
-     this.user = snap.data()
-    })
-   }
+   });
+   await db.collection("users").doc(uid).get()
+   .then(snap=> {
+    this.user = snap.data();
+   });
   },
   methods: {
    async logout() {
@@ -98,23 +136,74 @@
    },
    toggleMenu() {
     let sidebar = document.querySelector('.sidebar');
-    let content = document.querySelector('.content');
+    let topbar = document.querySelector('.topbar');
     sidebar.classList.toggle('d-sm-none');
-    content.classList.toggle('col-sm-12');
-    content.classList.toggle('col-sm-8');
+    topbar.classList.toggle('col-sm-8');
+    //content.classList.toggle('col-sm-12');
+   },
+   removeSidebar() {
+    let sidebar = document.querySelector('.sidebar');
+    let topbar = document.querySelector('.topbar');
+    sidebar.classList.add('d-sm-none');
+    topbar.classList.remove('col-sm-8');
    }
   },
-  computed: {}
+  computed: {
+   menus() {
+    const level = this.level;
+    if (level == "siswa") {
+     const menu = this.listMenu.filter(a=> {
+      return a.isSiswa == true;
+     })
+     return menu;
+    }
+    if (level == "guru") {
+     const menu = this.listMenu.filter(a=> {
+      return a.isGuru == true;
+     })
+     return menu;
+    }
+    if (level == "admin") {
+     const menu = this.listMenu.filter(a=> {
+      return a.isAdmin == true;
+     })
+     return menu;
+    }
+   },
+   name() {
+    return this.$store.state.name;
+   },
+   email() {
+    return this.$store.state.email;
+   },
+   level() {
+    return this.$store.state.level;
+   }
+  }
  }
  </script>
 
  <style scoped>
-  * {
+  *,
+  .row {
    margin: 0;
    padding: 0;
   }
-  div {
-   transition: width 1s;
+  .sidebar,
+  .content {
+   margin: 0;
+   padding: 0;
+  }
+  .wrapper .sidebar {
+   background: rgba(0,200,0,.6) !important;
+   z-index: 1;
+  }
+  .wrapper .content {
+   background-color: #ddd;
+   margin-left: auto;
+  }
+  .topbar.col-sm-8 {
+   margin-left: auto;
   }
   .img-user {
    width: 100px;

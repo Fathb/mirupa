@@ -7,6 +7,12 @@ import {
 } from '../firebase.js';
 import Home from '../views/Home.vue';
 import detailSiswa from '../views/detailSiswa.vue';
+import Dashboard from '../views/dashboard.vue';
+import jadwal from '../views/Jadwal.vue';
+import DashboardHome from '../views/Dashboard/Home.vue';
+import DashboardProfile from '../views/Dashboard/Profile.vue';
+import DashboardJadwal from '../views/Dashboard/Jadwal.vue';
+import Card from "../components/Dashboard/Card.vue";
 
 const routes = [{
  path: '/',
@@ -16,9 +22,6 @@ const routes = [{
  {
   path: '/perpus',
   name: 'Perpus',
-  // route level code-splitting
-  // this generates a separate chunk (about.[hash].js) for this route
-  // which is lazy-loaded when the route is visited.
   component: () => import('../views/About.vue')
  },
  {
@@ -37,11 +40,6 @@ const routes = [{
   component: () => import('../views/gallery.vue')
  },
  {
-  path: '/Kelas',
-  name: 'kelas',
-  component: () => import('../views/kelas.vue')
- },
- {
   path: '/siswa/:id',
   name: 'details siswa',
   component: detailSiswa
@@ -57,9 +55,29 @@ const routes = [{
   component: () => import('../views/login.vue')
  },
  {
+  path: '/jadwal',
+  name: 'jadwal',
+  component: jadwal
+ },
+ {
   path: '/dashboard',
   name: 'dashboard',
-  component: () => import('../views/dashboard.vue'),
+  component: Dashboard,
+  children: [{
+   path: "",
+   component: DashboardHome,
+   name: "Dashboard | Home"
+  },
+   {
+    path: "profile",
+    component: DashboardProfile,
+    name: "Dashboard | Profile User"
+   },
+   {
+    path: "jadwal",
+    component: DashboardJadwal,
+    name: "Dashboard | jadwal"
+   }]
  },
  {
   path: '/:catchAll(.*)',
@@ -80,7 +98,7 @@ router.beforeEach((to, from, next)=> {
    name: 'login'
   })
  } else if (to.name == 'daftar' && user || to.name == 'login' && user) {
-  document.title = to.name;
+  document.title = "MIRUPA | "+to.name;
   next({
    name: 'dashboard'
   });

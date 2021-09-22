@@ -16,7 +16,7 @@
     </div>
     <hr>
     <div class="nav">
-     <div class="menu nav-item mt-1 ml-3" v-for="(menu, id) in menus">
+     <div class="menu nav-item mt-1 ml-3" v-for="(menu, id) in menus" :key="id">
       <router-link :to="menu.url" class="nav-link py-1 d-flex align-item-center">
        <span class="iconmenu mr-2"><i :class="menu.icon"></i></span>
        <span class="titlemenu text-uppercase font-weight-bold mt-1">{{menu.title}}</span>
@@ -151,24 +151,23 @@
   computed: {
    menus() {
     const level = this.level;
+    let menu
     if (level == "siswa") {
-     const menu = this.listMenu.filter(a=> {
+     menu = this.listMenu.filter(a=> {
       return a.isSiswa == true;
      })
-     return menu;
     }
     if (level == "guru") {
-     const menu = this.listMenu.filter(a=> {
+     menu = this.listMenu.filter(a=> {
       return a.isGuru == true;
-     })
-     return menu;
+     });
     }
     if (level == "admin") {
-     const menu = this.listMenu.filter(a=> {
+     menu = this.listMenu.filter(a=> {
       return a.isAdmin == true;
-     })
-     return menu;
+     });
     }
+    return menu;
    },
    name() {
     return this.$store.state.name;

@@ -12,7 +12,6 @@ import jadwal from '../views/Jadwal.vue';
 import DashboardHome from '../views/Dashboard/Home.vue';
 import DashboardProfile from '../views/Dashboard/Profile.vue';
 import DashboardJadwal from '../views/Dashboard/Jadwal.vue';
-import Card from "../components/Dashboard/Card.vue";
 
 const routes = [{
  path: '/',

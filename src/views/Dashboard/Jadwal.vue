@@ -23,8 +23,12 @@
      <td>{{jdw.guru}}</td>
      <td>{{jdw.mapel}}</td>
      <td v-if="admin">
-      <span class="btn btn-warning"><i class="fas fa-fw fa-pencil-alt"></i></span>
-      <span class="btn btn-danger ml-1"><i class="fas fa-fw fa-trash-alt"></i></span>
+      <span class="btn btn-warning">
+       <i class="fas fa-fw fa-pencil-alt"></i>
+      </span>
+      <span class="btn btn-danger ml-1">
+       <i class="fas fa-fw fa-trash-alt"></i>
+      </span>
      </td>
     </tr>
    </tbody>
@@ -60,8 +64,11 @@
    <label for="mapel">Mata Pelajaran</label>
    <input class="form-control" type="text" name="" id="mapel" v-model="jadwal.mapel" />
   </div>
+  <div class="alert alert-danger" v-if="error">
+   {{checkJdw}}
+  </div>
   <button class="btn btn-danger" @click="closeModal">cancel</button>
-  <button class="btn btn-success ml-1" @click="tambahJadwal">submit</button>
+  <button class="btn btn-success ml-1" @click="tambahJadwal">Submit</button>
  </modal>
 </template>
 <script>
@@ -77,6 +84,7 @@
   data() {
    return {
     modal: false,
+    error: false,
     jadwal: {
      hari: "",
      jam: null,
@@ -120,34 +128,62 @@
     } else {
      return true;
     }
+   },
+   checkJdw() {
+    let msg;
+    if (this.jadwal.hari == '' || this.jadwal.jam == null || this.jadwal.kelas == null || this.jadwal.guru == '' || this.jadwal.mapel == '') {
+     this.error = true;
+     msg = 'form tidak boleh ada yang kosong';
+    } else {
+     this.jadwals.forEach((jdw)=> {
+      if (this.jadwal.hari == jdw.hari && this.jadwal.jam == jdw.jam && this.jadwal.kelas == jdw.kelas) {
+       this.error = true;
+       msg = 'jadwal kelas sudah terisi';
+      } else if (this.jadwal.hari == jdw.hari && this.jadwal.jam == jdw.jam && this.jadwal.guru == jdw.guru) {
+       this.error = true;
+       msg = 'guru terjadwal di kelas lain'
+      }
+     });
+    }
+    this.error = false;
+    return msg;
    }
   },
   methods: {
    modalToggle() {
-    this.guru = [];
-    db.collection("users").where("level", "!=", "siswa").get().then(data=> {
-     data.forEach(guru=> {
-      this.guru.push(guru.data().name);
-     })
-    }).catch(err=> {
-     console.log(err);
-    })
+    console.log(this.jadwals[0].id)
     this.modal = !this.modal;
    },
    closeModal() {
-    this.modal = !this.modal;
+    this.modal = false;
+    this.error = false;
    },
    tambahJadwal() {
-    db.collection("jadwal").add(this.jadwal).then(()=> {
-     this.jadwal.hari = "";
-     this.jadwal.jam = null;
-     this.jadwal.guru = "";
-     this.jadwal.kelas = null;
-     this.jadwal.mapel = "";
-     this.modal = !this.modal;
-    }).catch(err=> {
-     console.log(err);
-    })
+    if (this.checkJdw) {
+     this.error = true;
+    } else {
+     db.collection("jadwal").add(this.jadwal).then(()=> {
+      this.jadwal.hari = "";
+      this.jadwal.jam = null;
+      this.jadwal.guru = "";
+      this.jadwal.kelas = null;
+      this.jadwal.mapel = "";
+     }).catch(err=> {
+      console.log(err);
+     })
+    }
+   },
+   getGuru() {
+    this.guru = [];
+    db.collection("users").where("level",
+     "!=",
+     "siswa").get().then(data=> {
+      data.forEach(guru=> {
+       this.guru.push(guru.data().name);
+      })
+     }).catch(err=> {
+      console.log(err);
+     })
    }
   }
  }

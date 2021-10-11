@@ -30,9 +30,12 @@ export default createStore({
    state.user = payload;
   },
   setDataJadwal(state, payload) {
+   let jadwal = {};
    state.jadwals = [];
    payload.forEach(dataJdw=> {
-    state.jadwals.push(dataJdw.data());
+    jadwal = dataJdw.data();
+    jadwal.id = dataJdw.id;
+    state.jadwals.push(jadwal);
    })
   }
  },

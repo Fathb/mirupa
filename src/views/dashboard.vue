@@ -111,10 +111,10 @@
      }]
    }
   },
-  async created() {
+  created() {
    //this.$store.dispatch("getUserInfo");
    let uid;
-   await auth.onAuthStateChanged(user=> {
+   auth.onAuthStateChanged(user=> {
     if (user) {
      uid = user.uid;
     } else {
@@ -122,7 +122,7 @@
      this.$router.replace("/login")
     }
    });
-   await db.collection("users").doc(uid).get()
+   db.collection("users").doc(uid).get()
    .then(snap=> {
     this.user = snap.data();
    });

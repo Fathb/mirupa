@@ -37,18 +37,9 @@
    'nav-bar': navbar,
    'foot-bar': footer
   },
-  data() {},
   computed: {
    jadwals() {
     return this.$store.state.jadwals;
-   }
-  },
-  methods: {
-   resulJdw(results) {
-    this.jadwals = [];
-    results.forEach(result=> {
-     this.jadwals.push(result.data())
-    })
    }
   }
  }

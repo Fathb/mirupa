@@ -2,7 +2,7 @@
  <div class="wrapper">
   <div class="row">
    <!--sidebar-->
-   <div class="col-lg-3 col-sm-4 d-lg-block sidebar vh-100 bg-success position-fixed overflow-hidden d-sm-none">
+   <div class="col-lg-3 col-sm-4 d-lg-block sidebar vh-100 bg-success position-fixed overflow-hidden d-none">
     <div class="boxUser">
      <div class="img-user rounded-circle border d-flex justify-content-center overflow-hidden my-1 mx-auto bg-warning">
       <img src="../assets/logo.jpeg" alt="user" height="100" />
@@ -16,9 +16,9 @@
     </div>
     <hr>
     <div class="nav">
-     <div class="menu nav-item mt-1 ml-3" v-for="(menu, id) in menus" :key="id">
+     <div class="menu nav-item mt-1" v-for="(menu, id) in menus" :key="id">
       <router-link :to="menu.url" class="nav-link py-1 d-flex align-item-center">
-       <span class="iconmenu mr-2"><i :class="menu.icon"></i></span>
+       <span class="iconmenu mx-3"><i :class="menu.icon"></i></span>
        <span class="titlemenu text-uppercase font-weight-bold mt-1">{{menu.title}}</span>
       </router-link>
      </div>
@@ -39,7 +39,7 @@
      </div>
     </div>
     <!--end topbar-->
-    <div @click="removeSidebar">
+    <div class="cotainer-view" @click="removeSidebar">
      <router-view></router-view>
     </div>
    </div>
@@ -137,21 +137,20 @@
    toggleMenu() {
     let sidebar = document.querySelector('.sidebar');
     let topbar = document.querySelector('.topbar');
-    sidebar.classList.toggle('d-sm-none');
-    topbar.classList.toggle('col-sm-8');
+    sidebar.classList.toggle('d-none');
     //content.classList.toggle('col-sm-12');
    },
    removeSidebar() {
     let sidebar = document.querySelector('.sidebar');
     let topbar = document.querySelector('.topbar');
-    sidebar.classList.add('d-sm-none');
+    sidebar.classList.add('d-none');
     topbar.classList.remove('col-sm-8');
    }
   },
   computed: {
    menus() {
     const level = this.level;
-    let menu
+    let menu;
     if (level == "siswa") {
      menu = this.listMenu.filter(a=> {
       return a.isSiswa == true;
@@ -183,10 +182,12 @@
  </script>
 
  <style scoped>
-  *,
-  .row {
+  body * {
    margin: 0;
    padding: 0;
+  }
+  body {
+   max-width: 100vw;
   }
   .sidebar,
   .content {
@@ -194,15 +195,17 @@
    padding: 0;
   }
   .wrapper .sidebar {
-   background: rgba(0,200,0,.6) !important;
+   background: rgba(0,255,0,.9) !important;
+   top: 51px;
    z-index: 1;
   }
   .wrapper .content {
    background-color: #ddd;
+   overflow-x: scroll;
    margin-left: auto;
   }
-  .topbar.col-sm-8 {
-   margin-left: auto;
+  .content .cotainer-view {
+   padding: 15px;
   }
   .img-user {
    width: 100px;
@@ -216,10 +219,10 @@
   .titlemenu {
    font-size: 1.3rem;
   }
-  .menu {
-   width: 100%;
-  }
-  .nav-link {
+  .nav,
+  .menu,
+  .nav-link,
+  .sidebar .nav .nav-item {
    width: 100%;
   }
   .nav-link:hover,
@@ -233,5 +236,14 @@
   .content {
    min-height: 100vh;
   }
-
+  .sidebar.d-none {
+   top: 0;
+  }
+@media screen (max-width: 578px) {
+   .wrapper .sidebar {
+    background: rgba(0,255,0,.9) !important;
+    top: 0;
+    z-index: 1;
+   }
+  }
  </style>

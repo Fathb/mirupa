@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.f68f18425950d1fa152b1adaf8c8046b.js"
+  "/webmirupa/precache-manifest.5f49f635567cc1323e43e7b768724d6a.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "mirupa"});

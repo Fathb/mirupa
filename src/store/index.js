@@ -37,6 +37,9 @@ export default createStore({
     jadwal.id = dataJdw.id;
     state.jadwals.push(jadwal);
    })
+  },
+  updateJadwal(state, payload) {
+   db.collection('jadwal').doc(payload.id).update(payload);
   }
  },
  actions: {

@@ -1,8 +1,8 @@
 <template>
  <div class="container mt-2">
   <h1 class="text-center">Jadwal Pelajaran MIRUPa</h1>
-  <button class="btn btn-primary float-right mb-1" @click="modalToggle" v-if="admin">tambah jadwal</button>
-  <table class="table table-stripped table-md">
+  <button class="btn btn-primary float-right mb-1" @click="modalTambah" v-if="admin">tambah jadwal</button>
+  <table class="table table-stripped table-responsive-md">
    <thead class="thead-dark">
     <tr>
      <th scope="col">No</th>
@@ -23,10 +23,10 @@
      <td>{{jdw.guru}}</td>
      <td>{{jdw.mapel}}</td>
      <td v-if="admin">
-      <span class="btn btn-warning">
+      <span class="btn btn-warning" @click="modalUpdate(n)">
        <i class="fas fa-fw fa-pencil-alt"></i>
       </span>
-      <span class="btn btn-danger ml-1">
+      <span class="btn btn-danger ml-1" @click="hapusJdw(jdw.id)">
        <i class="fas fa-fw fa-trash-alt"></i>
       </span>
      </td>
@@ -68,7 +68,7 @@
    {{checkJdw}}
   </div>
   <button class="btn btn-danger" @click="closeModal">cancel</button>
-  <button class="btn btn-success ml-1" @click="tambahJadwal">Submit</button>
+  <button class="btn btn-success ml-1" @click="tambahJadwal">{{btnModal}}</button>
  </modal>
 </template>
 <script>
@@ -85,6 +85,7 @@
    return {
     modal: false,
     error: false,
+    btnModal: 'tambah jadwal',
     jadwal: {
      hari: "",
      jam: null,
@@ -147,30 +148,56 @@
     }
     this.error = false;
     return msg;
+   },
+   checkJdwUpdate() {
+    let msg;
+    this.jadwals.forEach((jdw)=> {
+     if (this.jadwal.hari == jdw.hari && this.jadwal.jam == jdw.jam && this.jadwal.kelas == jdw.kelas && this.jadwal.id != jdw.id) {
+      this.error = true;
+      msg = 'jadwal kelas sudah terisi';
+     } else if (this.jadwal.hari == jdw.hari && this.jadwal.jam == jdw.jam && this.jadwal.guru == jdw.guru && this.jadwal.id != jdw.id) {
+      this.error = true;
+      msg = 'guru terjadwal di kelas lain'
+     }
+    });
+    return msg;
    }
   },
+  created() {
+   this.getGuru();
+  },
   methods: {
-   modalToggle() {
-    console.log(this.jadwals[0].id)
+   modalTambah() {
+    this.btnModal = 'tambah jadwal';
     this.modal = !this.modal;
    },
    closeModal() {
+    this.jadwal.hari = "";
+    this.jadwal.jam = null;
+    this.jadwal.guru = "";
+    this.jadwal.kelas = null;
+    this.jadwal.mapel = "";
     this.modal = false;
     this.error = false;
    },
    tambahJadwal() {
-    if (this.checkJdw) {
-     this.error = true;
+    if (this.btnModal == 'tambah jadwal') {
+     if (this.checkJdw) {
+      this.error = true;
+     } else {
+      db.collection("jadwal").add(this.jadwal).then(()=> {
+       this.closeModal();
+      }).catch(err=> {
+       console.log(err);
+      })
+     }
     } else {
-     db.collection("jadwal").add(this.jadwal).then(()=> {
-      this.jadwal.hari = "";
-      this.jadwal.jam = null;
-      this.jadwal.guru = "";
-      this.jadwal.kelas = null;
-      this.jadwal.mapel = "";
-     }).catch(err=> {
-      console.log(err);
-     })
+     if (this.checkJdwUpdate) {
+      this.error = true;
+     } else {
+      this.$store.commit("updateJadwal", this.jadwal);
+      this.modal = false;
+     }
     }
    },
    getGuru() {
@@ -184,6 +211,19 @@
      }).catch(err=> {
       console.log(err);
      })
+   },
+   hapusJdw (id) {
+    db.collection('jadwal').doc(id).delete();
+   },
+   modalUpdate(idx) {
+    this.jadwal.hari = this.jadwals[idx].hari;
+    this.jadwal.jam = this.jadwals[idx].jam;
+    this.jadwal.guru = this.jadwals[idx].guru;
+    this.jadwal.kelas = this.jadwals[idx].kelas;
+    this.jadwal.mapel = this.jadwals[idx].mapel;
+    this.jadwal.id = this.jadwals[idx].id;
+    this.btnModal = 'update jadwal';
+    this.modal = true;
    }
   }
  }

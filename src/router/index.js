@@ -12,6 +12,7 @@ import jadwal from '../views/Jadwal.vue';
 import DashboardHome from '../views/Dashboard/Home.vue';
 import DashboardProfile from '../views/Dashboard/Profile.vue';
 import DashboardJadwal from '../views/Dashboard/Jadwal.vue';
+import DashboardQuiz from '../views/Dashboard/quiz.vue';
 
 const routes = [{
  path: '/',
@@ -76,6 +77,11 @@ const routes = [{
     path: "jadwal",
     component: DashboardJadwal,
     name: "Dashboard | jadwal"
+   },
+   {
+    path: "quiz",
+    component: DashboardQuiz,
+    name: "Dashboard | quiz"
    }]
  },
  {

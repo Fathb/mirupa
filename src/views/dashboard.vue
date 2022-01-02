@@ -94,9 +94,9 @@
       isSiswa: true
      },
      {
-      title: "informasi",
+      title: "Quiz",
       icon: "fas fw fa-volume-up fa-2x",
-      url: "/dashboard/info",
+      url: "/dashboard/quiz",
       isAdmin: false,
       isGuru: true,
       isSiswa: false

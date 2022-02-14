@@ -6,13 +6,14 @@ import {
  auth
 } from '../firebase.js';
 import Home from '../views/Home.vue';
-import detailSiswa from '../views/detailSiswa.vue';
 import Dashboard from '../views/dashboard.vue';
 import jadwal from '../views/Jadwal.vue';
 import DashboardHome from '../views/Dashboard/Home.vue';
 import DashboardProfile from '../views/Dashboard/Profile.vue';
 import DashboardJadwal from '../views/Dashboard/Jadwal.vue';
+import DashboardPpdb from '../views/ppdb.vue';
 import DashboardQuiz from '../views/Dashboard/quiz.vue';
+import soal from '../views/Dashboard/halamanSoal.vue';
 
 const routes = [{
  path: '/',
@@ -25,11 +26,6 @@ const routes = [{
   component: () => import('../views/About.vue')
  },
  {
-  path: '/ppdb',
-  name: 'ppdb',
-  component: () => import('../views/ppdb.vue')
- },
- {
   path: '/profile',
   name: 'profile',
   component: () => import('../views/profile.vue')
@@ -38,11 +34,6 @@ const routes = [{
   path: '/gallery',
   name: 'gallery',
   component: () => import('../views/gallery.vue')
- },
- {
-  path: '/siswa/:id',
-  name: 'details siswa',
-  component: detailSiswa
  },
  {
   path: '/daftar',
@@ -79,9 +70,19 @@ const routes = [{
     name: "Dashboard | jadwal"
    },
    {
+    path: "ppdb",
+    component: DashboardPpdb,
+    name: "Dashboard | ppdb"
+   },
+   {
     path: "quiz",
     component: DashboardQuiz,
     name: "Dashboard | quiz"
+   },
+   {
+    path: "quiz/:idQuiz",
+    component: soal,
+    name: "Dashboard | question page"
    }]
  },
  {

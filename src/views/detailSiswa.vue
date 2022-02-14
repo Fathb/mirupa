@@ -12,8 +12,8 @@
   </div>
   <div class="row title mt-2 mb-4">
    <div class="col">
-    <h6>DETAIL DATA CALON SISWA</h6>
-    <h8>MIRUPa</h8>
+    <h5>DETAIL DATA CALON SISWA</h5>
+    <h6>MIRUPa</h6>
    </div>
   </div>
   <div class="row datasiswa mt-2 mb-2">
@@ -189,7 +189,7 @@
    <p>
     {{siswa.ayah.nama.toUpperCase()}}
    </p>
-  </div>
+  </div> 
  </div>
 </template>
 <script>
@@ -197,14 +197,10 @@
   db
  } from '../firebase.js';
 
- const siswaCollection = db.collection('siswa');
-
  export default {
   name: 'detailSiswa',
   data() {
    return {
-    id: this.$route.params.id,
-    siswa: null,
     day: new Date().getDate().toLocaleString(),
     month: ["Januari",
      "Februari",
@@ -220,11 +216,10 @@
     year: new Date().getFullYear()
    }
   },
-  created() {
-   siswaCollection.doc(this.id).get().then(detail => {
-    this.siswa = detail.data();
-   });
-
+  computed: {
+   siswa(){
+    return this.$store.state.detail;
+   }
   }
  }
  </script>

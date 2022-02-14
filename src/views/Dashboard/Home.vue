@@ -1,5 +1,5 @@
 <template>
- <div class="container">
+ <div class="container container-md mx-auto">
   <Card :cards="cards"></Card>
  </div>
 </template>

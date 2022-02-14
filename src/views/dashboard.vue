@@ -39,7 +39,7 @@
      </div>
     </div>
     <!--end topbar-->
-    <div class="cotainer-view" @click="removeSidebar">
+    <div class="container-view" @click="removeSidebar">
      <router-view></router-view>
     </div>
    </div>
@@ -95,11 +95,11 @@
      },
      {
       title: "Quiz",
-      icon: "fas fw fa-volume-up fa-2x",
+      icon: "fas fw fa-feather-alt fa-2x",
       url: "/dashboard/quiz",
       isAdmin: false,
       isGuru: true,
-      isSiswa: false
+      isSiswa: true
      },
      {
       title: "mading",
@@ -136,7 +136,7 @@
    },
    toggleMenu() {
     let sidebar = document.querySelector('.sidebar');
-    let topbar = document.querySelector('.topbar');
+    //let topbar = document.querySelector('.topbar');
     sidebar.classList.toggle('d-none');
     //content.classList.toggle('col-sm-12');
    },
@@ -185,6 +185,7 @@
   body * {
    margin: 0;
    padding: 0;
+   box-sizing: border-box;
   }
   body {
    max-width: 100vw;

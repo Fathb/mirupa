@@ -2,8 +2,8 @@
  <div class="content">
   <div class="row">
    <div class="col header d-flex align-items-center justify-content-center border-bottom border-dark">
-    <img src="../../assets/logo.jpeg" alt="" class="mb-2" />
-    <div class="textkop mb-2 text-left">
+    <img src="../../assets/logo.jpeg" alt="" class="mb-2 mr-2" />
+    <div class="textkop mb-2 text-center">
      <h3>YPPP RAUDLATUL ULUM</h3>
      <h2>MI RAUDLATUL ULUM PUTRA</h2>
      <small>Jl Raya No 02 Ganjaran Gondanglegi Malang pos 65174</small>
@@ -11,10 +11,10 @@
    </div>
   </div>
   <div class="row title mt-2 mb-4">
-   <div class="col">
-    <h6>FORMULIR</h6>
-    <h8>PENERIMAAN PESERTA DIDIK BARU</h8>
-    <h8>PERIODE 2021 - 2022</h8>
+   <div class="col text-center">
+    <h4>FORMULIR</h4>
+    <h6>PENERIMAAN PESERTA DIDIK BARU</h6>
+    <h6>PERIODE 2021 - 2022</h6>
    </div>
   </div>
   <div class="row datasiswa mt-2 mb-2">
@@ -248,7 +248,7 @@
    }
   },
   methods: {
-   inputsiswa() {
+   async inputsiswa() {
     this.errors = [];
     if (this.siswa.noKk == null || this.siswa.noKk.length != 16) {
      const msgErr = 'nomor KK salah atau kosong';
@@ -323,8 +323,8 @@
      this.errors.push(msgErr);
     }
     if (!this.errors.length) {
-     siswaCollection.add(this.siswa);
-     const msgSuccess = 'selamat! anda terdaftar di MIRUPa';
+     await siswaCollection.doc(this.$store.state.id).set(this.siswa);
+     const msgSuccess = 'biodata berhasil diinput';
      this.msgClass = 'success';
      this.errors.push(msgSuccess);
      this.siswa.noKk = null;
@@ -360,7 +360,15 @@
    width: 85%;
    position: relative;
   }
-  h1, h2, h3, h4, h5, h6, h7, h8 {
+  .textkop h2 {
+   font-size: 1.5rem;
+   font-weight: 800;
+  }
+  .textkop h3 {
+   font-size: 1.3rem;
+   font-weight: 650;
+  }
+  h1, h2, h3, h4, h5, h6 {
    margin: 0;
   }
   .header img {

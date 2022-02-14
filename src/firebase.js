@@ -3,7 +3,7 @@ import "firebase/firestore";
 import "firebase/auth";
 
 const config = {
- apiKey: "AIzaSyB-WwmK5UXLKfToFGGJn_UvyK_x3sbZ1EA",
+ apiKey: process.env.VUE_APP_FB_API_KEY,
  authDomain: "mirupa-10885.firebaseapp.com",
  databaseURL: "https://mirupa-10885.firebaseio.com",
  projectId: "mirupa-10885",

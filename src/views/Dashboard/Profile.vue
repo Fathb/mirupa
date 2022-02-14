@@ -1,5 +1,5 @@
 <template>
- <div class="container mt-4">
+ <div class="container container-md mt-3 mx-auto">
   <div class="card p-2">
    <div class="card-img-top">
     <span class="text-uppercase">{{this.$store.state.initial}}</span>

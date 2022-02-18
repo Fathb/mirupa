@@ -10,7 +10,7 @@
     v-if="getJawaban"
     >
   </page-nilai>
-  <div class="container mx-auto mt-3" v-else-if="level!='guru'">
+  <div class="container container-md mx-auto mt-3" v-else-if="level!='guru'">
     <div v-if="!getQuizs">
       <h3 class="text-center">
         belum ada soal untuk quiz ini
@@ -22,22 +22,28 @@
           <span :class="jawabans[id]?'btn btn-primary': idxItem == id?'btn btn-danger':'btn btn-outline-danger'" @click="gantiSoal(id)">{{id+1}}</span>
         </div>
       </div>
-      <div class="row mt-2">
+      <div class="row mt-2 justify-content-start">
         <div class="col-12">
           <p>
             {{getQuizs[idxItem].soal}}
           </p>
         </div>
-        <div class="col-6 form-check" v-for="(plh, n) in getQuizs[idxItem].pilihan" :key="n">
+        <div class="form-check form-check-inline ml-3" v-for="(plh, n) in getQuizs[idxItem].pilihan" :key="n">
           <input class="form-check-input" type="radio" v-model="jawabans[idxItem]" :value="n.toString()" :id="plh" />
           <label class="form-check-label" :for="plh">{{plh}}</label>
         </div>
       </div>
-      <div class="row mt-5">
-        <div class="col-6"></div>
-        <div class="col-6">
+      <div class="row mt-5 justify-content-end">
+        <div class="col-sm-3">
           <span class="btn btn-success" @click="simpanjawaban">{{btnNext}}</span>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="container container-md my-2 mx-auto">
+    <div class="row justify-content-end">
+      <div class="col-3">
+        <router-link class="btn btn-warning" to="/dashboard/quiz"> kembali</router-link>
       </div>
     </div>
   </div>
@@ -87,7 +93,7 @@
         })
         let b = [];
         quiz.jawaban.forEach(dataJawaban=> {
-            b.push(dataJawaban)
+          b.push(dataJawaban)
         });
         return b
       },
@@ -132,18 +138,19 @@
 
           this.$swal.fire({
             title: 'yakin dengan jawabannya?',
-            text: "You won't be able to revert this!",
+            text: "kamu tidak bisa mengedit lagi!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            cancelButtonText: 'tidak',
+            confirmButtonText: 'yakin!'
           }).then((result) => {
             if (result.isConfirmed) {
               this.$store.commit("simpanjawaban", data);
               this.$swal.fire(
                 'terima kasih!',
-                'jawaban anda tersimpan'
+                'jawaban anda sudah tersimpan'
               )
             }
           })

@@ -39,13 +39,13 @@
           <td class="text-left">{{q.soal}}</td>
           <td>
             <ol type="A">
-              <li v-for="(c, id) in q.pilihan" :key="id">{{c}}</li>
+              <li class="text-left ml-3" v-for="(c, id) in q.pilihan" :key="id">{{c}}</li>
             </ol>
           </td>
           <td>{{q.pilihan[q.kunci]}}</td>
           <td>
-            <span class="badge badge-success">edit</span>
-            <span class="badge badge-danger">hapus</span>
+            <span class="btn btn-success">edit</span>
+            <span class="btn btn-danger ml-1">hapus</span>
           </td>
         </tr>
       </tbody>
@@ -53,9 +53,6 @@
   </div>
 </template>
 <script>
-  import {
-    db
-  } from "../../firebase.js";
   export default {
     name: "detail quiz",
     data() {
@@ -67,9 +64,6 @@
       quiz: Array,
       dataSiswa: Array
     },
-    computed: {
-      jawabanSiswa() {}
-    },
     async created() {
       this.listJwb = []
       for (var i = 0; i < this.dataSiswa.length; i++) {
@@ -80,7 +74,7 @@
           data.siswa = dtssw.data();
         });
         this.listJwb.push(data);
-      };
+      }
     }
   }
   </script>

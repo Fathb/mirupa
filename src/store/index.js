@@ -4,7 +4,8 @@ import {
 import {
   auth,
   db,
-  firebase
+  firebase,
+  googleProvider
 } from "../firebase";
 
 export default createStore({
@@ -31,6 +32,14 @@ export default createStore({
     },
     updateUser(state, payload) {
       state.user = payload;
+    },
+    resetUser(state) {
+      state.user = null;
+      state.name = null;
+      state.email = null;
+      state.level = null;
+      state.id = null;
+
     },
     setDataJadwal(state, payload) {
       let jadwal = {};
@@ -66,7 +75,6 @@ export default createStore({
       })
     },
     setQuizStat(state) {
-      let statArr = []
       state.quiz.map(quizs=> {
         const jawabanSiswa = quizs.jawaban.find(({
           siswaRef
@@ -101,6 +109,21 @@ export default createStore({
         commit("setQuiz", results);
         commit("setQuizStat");
       })
+    },
+    loginGoogle() {
+      auth.signInWithPopup(googleProvider)
+      .then((result) => {
+        if (result.additionalUserInfo.isNewUser) {
+          db.collection('users').doc(result.user.uid).set({
+            email: result.user.email,
+            name: result.user.displayName,
+            level: 'siswa'
+          });
+        }
+      }).catch((error) => {
+        // Handle Errors here.
+console.log(error);
+      });
     }
   },
   modules: {}
